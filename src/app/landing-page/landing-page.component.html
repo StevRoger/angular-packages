@@ -1,0 +1,23 @@
+<p>landing-page works!</p>
+<ngui-map
+  zoom="15"
+  center="11.550285, 104.844227"
+  (mapReady$)="onMapReady($event)"
+  (mapClick)="onMapClick($event)"
+  (idle)="onIdle($event)"
+  mapTypeId="satellite">
+  <marker *ngFor="let pos of positions"
+          [position]="pos"
+          (initialized$)="onMarkerInit($event)"></marker>
+</ngui-map>
+
+<button (click)="signInWithFB()">Login with Facebook
+</button>
+<button (click)="signInWithGoogle()">Login with Google
+</button>
+
+<br>
+<br>
+<code style="background-color: #f5f5f5">
+  {{user}}
+</code>
