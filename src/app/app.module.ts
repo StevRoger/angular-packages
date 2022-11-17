@@ -11,6 +11,7 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule
 } from "angularx-social-login";
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
+    ClipboardModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDNBPJ71l5IVJzHyhgJIp6OW_1tZq1AJpk'})
   ],
   providers: [
@@ -39,7 +41,7 @@ import {
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1432103473956063')
+            provider: new FacebookLoginProvider('1645712742469650')
           }
         ],
         onError: (err: any) => {

@@ -1,23 +1,51 @@
-<p>landing-page works!</p>
-<ngui-map
-  zoom="15"
-  center="11.550285, 104.844227"
-  (mapReady$)="onMapReady($event)"
-  (mapClick)="onMapClick($event)"
-  (idle)="onIdle($event)"
-  mapTypeId="satellite">
-  <marker *ngFor="let pos of positions"
-          [position]="pos"
-          (initialized$)="onMarkerInit($event)"></marker>
-</ngui-map>
 
-<button (click)="signInWithFB()">Login with Facebook
-</button>
-<button (click)="signInWithGoogle()">Login with Google
-</button>
-
-<br>
-<br>
-<code style="background-color: #f5f5f5">
-  {{user}}
-</code>
+<div class="container-fluid">
+  <div class="row my-5">
+    <div class="col-12">
+      <p class="h1 mb-3 text-center">Angular Version ~13.2.0</p>
+    </div>
+    <div class="col-12 mb-5">
+      <div class="card">
+        <div class="card-header">
+          <p class="h4">Map</p>
+          <p>More info: <a href="https://ngmap.github.io/" target="_blank">Official site.</a></p>
+        </div>
+        <div class="card-body">
+          <ngui-map
+            zoom="15"
+            center="11.550285, 104.844227"
+            (mapReady$)="onMapReady($event)"
+            (mapClick)="onMapClick($event)"
+            (idle)="onIdle($event)"
+            mapTypeId="satellite">
+            <marker *ngFor="let pos of positions"
+                    [position]="pos"
+                    (initialized$)="onMarkerInit($event)"></marker>
+          </ngui-map>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <button class="btn btn-primary fw-semibold" (click)="signInWithFB()">Login with Facebook</button>
+          <button [disabled]="!fbuser"  class="btn btn-light fw-semibold" (click)="copyToClipboard(fbuser)"><i class="bi bi-clipboard"></i></button>
+        </div>
+        <div class="card-body" style="min-height: 10rem">
+          {{fbuser | json}}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <button class="btn btn-primary fw-semibold" (click)="signInWithGoogle()">Login with Google</button>
+          <button [disabled]="!gguser" class="btn btn-light fw-semibold" (click)="copyToClipboard(gguser)"><i class="bi bi-clipboard"></i></button>
+        </div>
+        <div class="card-body" style="min-height: 10rem">
+          {{gguser | json}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

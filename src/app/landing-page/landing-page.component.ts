@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService} from "angularx-social-login";
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,9 +9,11 @@ import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService} from "ang
 })
 export class LandingPageComponent implements OnInit {
   positions: any;
-  user: any;
+  fbuser: any;
+  gguser: any;
   constructor(
     private readonly _authService: SocialAuthService,
+    private clipboard: Clipboard
   ) { }
 
   ngOnInit(): void {
@@ -35,18 +38,18 @@ export class LandingPageComponent implements OnInit {
   signInWithFB(): void {
     this._authService.signIn(FacebookLoginProvider.PROVIDER_ID).then((user) => {
       localStorage.setItem('FACEBOOK_USER', JSON.stringify(user));
-      localStorage.removeItem('GOOGLE_USER');
-      this.user = JSON.stringify(user);
-      // this._router.navigateByUrl('home').then();
+      this.fbuser = JSON.stringify(user);
     });
   }
 
   signInWithGoogle(): void {
     this._authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user) => {
       localStorage.setItem('GOOGLE_USER', JSON.stringify(user));
-      this.user = JSON.stringify(user);
-      localStorage.removeItem('FACEBOOK_USER');
-      // this._router.navigateByUrl('home').then();
+      this.gguser = JSON.stringify(user);
     });
+  }
+
+  copyToClipboard(value: any): void {
+    this.clipboard.copy(value);
   }
 }
